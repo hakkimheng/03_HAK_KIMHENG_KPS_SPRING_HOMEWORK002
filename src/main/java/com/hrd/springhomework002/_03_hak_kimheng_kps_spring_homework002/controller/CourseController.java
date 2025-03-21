@@ -5,6 +5,7 @@ import com.hrd.springhomework002._03_hak_kimheng_kps_spring_homework002.model.En
 import com.hrd.springhomework002._03_hak_kimheng_kps_spring_homework002.model.request.CourseRequest;
 import com.hrd.springhomework002._03_hak_kimheng_kps_spring_homework002.model.response.ApiResponse;
 import com.hrd.springhomework002._03_hak_kimheng_kps_spring_homework002.service.CourseService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +24,7 @@ public class CourseController {
 
     // get all courses
     @GetMapping
+    @Operation(summary = "Get all courses")
     public ResponseEntity<ApiResponse<List<Course>>> getAllCourses(@RequestParam(defaultValue = "1") Integer page,
                                                                   @RequestParam(defaultValue = "10") Integer size) {
         ApiResponse<List<Course>> response = ApiResponse.<List<Course>>builder()
@@ -37,6 +39,7 @@ public class CourseController {
 
     // get course by id
     @GetMapping("/{id}")
+    @Operation(summary = "Get course by ID")
     public ResponseEntity<ApiResponse<Course>> getCourseById(Integer id) {
         Course course = courseService.getCourseById(id);
         ApiResponse<Course> responseFound = ApiResponse.<Course>builder()
@@ -61,6 +64,7 @@ public class CourseController {
 
     // create course
     @PostMapping
+    @Operation(summary = "Create course")
     public ResponseEntity<ApiResponse<Course>> createCourse(CourseRequest courseRequest) {
         Course newCourse = courseService.createCourse(courseRequest);
         ApiResponse<Course> response = ApiResponse.<Course>builder()
@@ -75,6 +79,7 @@ public class CourseController {
 
     // update course
     @PutMapping("/{id}")
+    @Operation(summary = "Update course")
     public ResponseEntity<ApiResponse<Course>> updateCourse(@PathVariable Integer id, CourseRequest courseRequest) {
         Course course = courseService.getCourseById(id);
         ApiResponse<Course> responseFound = ApiResponse.<Course>builder()
@@ -99,6 +104,7 @@ public class CourseController {
 
     // delete course
     @DeleteMapping("/{id}")
+    @Operation(summary = "Delete course")
     public ResponseEntity<ApiResponse<Course>> deleteCourse(@PathVariable Integer id) {
         Course course = courseService.deleteCourse(id);
         ApiResponse<Course> responseFound = ApiResponse.<Course>builder()

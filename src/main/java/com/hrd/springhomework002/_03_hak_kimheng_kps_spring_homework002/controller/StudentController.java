@@ -4,6 +4,7 @@ import com.hrd.springhomework002._03_hak_kimheng_kps_spring_homework002.model.En
 import com.hrd.springhomework002._03_hak_kimheng_kps_spring_homework002.model.request.StudentRequest;
 import com.hrd.springhomework002._03_hak_kimheng_kps_spring_homework002.model.response.ApiResponse;
 import com.hrd.springhomework002._03_hak_kimheng_kps_spring_homework002.service.StudentService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -64,6 +65,7 @@ public class StudentController {
 
     // create student
     @PostMapping
+    @Operation(summary = "Create student")
     public ResponseEntity<ApiResponse<Student>> createStudent(@RequestBody StudentRequest studentRequest) {
         Student newStudent = studentService.createStudent(studentRequest);
         System.out.println(studentRequest.getCourseId());
@@ -79,6 +81,7 @@ public class StudentController {
 
     // update student
     @PutMapping("/{id}")
+    @Operation(summary = "Update student")
     public ResponseEntity<ApiResponse<Student>> updateStudent(@PathVariable Integer id, @RequestBody StudentRequest studentRequest) {
         Student student = studentService.updateStudent(id, studentRequest);
         ApiResponse<Student> responseFound = ApiResponse.<Student>builder()
@@ -104,6 +107,7 @@ public class StudentController {
 
     // delete student
     @DeleteMapping("/{id}")
+    @Operation(summary = "Delete student")
     public ResponseEntity<ApiResponse<Student>> deleteStudent(@PathVariable Integer id) {
         Student student = studentService.deleteStudent(id);
         ApiResponse<Student> responseFound = ApiResponse.<Student>builder()
