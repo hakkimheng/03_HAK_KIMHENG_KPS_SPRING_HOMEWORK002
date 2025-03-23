@@ -24,6 +24,7 @@ public class StudentController {
 
     // get all students
     @GetMapping
+    @Operation(summary = "Get all students")
     public ResponseEntity<ApiResponse<List<Student>>> getAllStudents(
             @RequestParam(defaultValue = "1") Integer page,
             @RequestParam(defaultValue = "10") Integer size
@@ -41,6 +42,7 @@ public class StudentController {
 
     // get student by id
     @GetMapping("/{id}")
+    @Operation(summary = "Get student by ID")
     public ResponseEntity<ApiResponse<Student>> getStudentById(Integer id) {
         Student student = studentService.getStudentById(id);
         ApiResponse<Student> responseFound = ApiResponse.<Student>builder()
